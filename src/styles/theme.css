@@ -1,0 +1,414 @@
+:root {
+  /* ===== Op-art / pixel-mosaic identity =====
+     Hard black-and-white, one electric-lime accent, modular square grid.
+     A design toy. Overrides the shared --oz-* contract + chrome aliases. */
+
+  /* color roles (contract) */
+  --oz-bg: #ffffff;
+  --oz-fg: #0a0a0a;
+  --oz-surface: #f2f2f2;
+  --oz-muted: #5c5c5c;
+  --oz-border: #0a0a0a;
+  --oz-accent: #c6ff00;        /* electric lime */
+  --oz-accent-fg: #0a0a0a;
+
+  /* chrome aliases (oz-chrome/styles.css reads these) */
+  --oz-paper: #ffffff;
+  --oz-paper-2: #f2f2f2;
+  --oz-ink: #0a0a0a;
+  --oz-ink-mute: #5c5c5c;
+  --oz-rule: #0a0a0a;
+  --oz-header-h: 4rem;
+  --oz-container: 76rem;
+  --oz-text-lg: 1.5rem;
+  --oz-text-md: 1rem;
+  --oz-text-sm: 0.875rem;
+  --oz-space-5: 1.25rem;
+  --oz-z-overlay: 1000;
+
+  /* bespoke tokens */
+  --qr-cell: 12px;             /* mosaic module size */
+  --qr-ink: #0a0a0a;
+  --qr-void: #ffffff;
+  --qr-accent: #c6ff00;
+  --qr-accent-2: #00e0ff;      /* cyan secondary flash */
+  --qr-shadow: 6px 6px 0 var(--oz-fg);
+
+  /* font slots */
+  --oz-font-display: 'Space Grotesk Variable', 'Space Grotesk', system-ui, sans-serif;
+  --oz-font-body: 'Space Grotesk Variable', 'Space Grotesk', system-ui, sans-serif;
+  --oz-font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --oz-bg: #0a0a0a;
+    --oz-fg: #f4f4f4;
+    --oz-surface: #161616;
+    --oz-muted: #9a9a9a;
+    --oz-border: #f4f4f4;
+    --oz-accent: #c6ff00;
+    --oz-accent-fg: #0a0a0a;
+
+    --oz-paper: #0a0a0a;
+    --oz-paper-2: #111111;
+    --oz-ink: #f4f4f4;
+    --oz-ink-mute: #9a9a9a;
+    --oz-rule: #f4f4f4;
+
+    --qr-ink: #f4f4f4;
+    --qr-void: #0a0a0a;
+    --qr-shadow: 6px 6px 0 var(--oz-fg);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html {
+  color-scheme: light dark;
+  background: var(--oz-bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background:
+    /* pixel-mosaic grid — modular squares everywhere */
+    repeating-linear-gradient(
+      to right,
+      color-mix(in srgb, var(--oz-fg) 6%, transparent) 0 1px,
+      transparent 1px var(--qr-cell)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--oz-fg) 6%, transparent) 0 1px,
+      transparent 1px var(--qr-cell)
+    ),
+    var(--oz-bg);
+  color: var(--oz-fg);
+  font-family: var(--oz-font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--oz-font-display);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin: 0;
+  font-weight: 700;
+}
+
+a { color: inherit; }
+
+::selection {
+  background: var(--qr-accent);
+  color: var(--oz-accent-fg);
+}
+
+:focus-visible {
+  outline: 3px solid var(--qr-accent);
+  outline-offset: 2px;
+}
+
+.wrap {
+  max-width: var(--oz-container);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* ---- op-art hero ---- */
+.hero {
+  position: relative;
+  padding: clamp(2.5rem, 8vw, 5.5rem) 0 clamp(2rem, 5vw, 3rem);
+  overflow: hidden;
+}
+.hero__kicker {
+  display: inline-block;
+  font-family: var(--oz-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  border: 2px solid var(--oz-fg);
+  background: var(--qr-accent);
+  color: var(--oz-accent-fg);
+}
+.hero__title {
+  font-size: clamp(2.75rem, 12vw, 7rem);
+  margin: 0.4em 0 0.2em;
+  text-transform: uppercase;
+}
+.hero__title em {
+  font-style: normal;
+  -webkit-text-stroke: 3px var(--oz-fg);
+  color: transparent;
+}
+.hero__sub {
+  max-width: 46ch;
+  color: var(--oz-muted);
+  font-size: 1.05rem;
+}
+
+/* op-art module reveal — a self-drawing mosaic of squares */
+.mosaic {
+  position: absolute;
+  inset: auto -2rem -3rem auto;
+  display: grid;
+  grid-template-columns: repeat(9, var(--m, 26px));
+  gap: 3px;
+  opacity: 0.9;
+  pointer-events: none;
+}
+.mosaic i {
+  width: var(--m, 26px);
+  height: var(--m, 26px);
+  background: var(--oz-fg);
+  transform: scale(0);
+  animation: pop 0.5s var(--oz-ease-out, cubic-bezier(0.16,1,0.3,1)) forwards;
+}
+.mosaic i.on { background: var(--qr-accent); }
+.mosaic i.off { background: transparent; }
+@keyframes pop { to { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .mosaic i { animation: none; transform: scale(1); }
+}
+
+/* ---- neo-brutalist panels ---- */
+.panel {
+  background: var(--oz-paper);
+  border: 2px solid var(--oz-fg);
+  box-shadow: var(--qr-shadow);
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border: 2px solid var(--oz-fg);
+  background: var(--oz-fg);
+}
+.tab {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  font-family: var(--oz-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.55rem 0.85rem;
+  background: var(--oz-paper);
+  color: var(--oz-fg);
+  border-right: 2px solid var(--oz-fg);
+}
+.tab:last-child { border-right: 0; }
+.tab[aria-selected='true'] {
+  background: var(--qr-accent);
+  color: var(--oz-accent-fg);
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.85rem;
+}
+.field label {
+  font-family: var(--oz-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--oz-muted);
+}
+.field input,
+.field textarea,
+.field select {
+  font: inherit;
+  padding: 0.6rem 0.7rem;
+  background: var(--oz-bg);
+  color: var(--oz-fg);
+  border: 2px solid var(--oz-fg);
+  border-radius: 0;
+}
+.field textarea { resize: vertical; min-height: 4.5rem; }
+.row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+.row > * { flex: 1 1 8rem; }
+
+.btn {
+  appearance: none;
+  cursor: pointer;
+  font-family: var(--oz-font-mono);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.1rem;
+  border: 2px solid var(--oz-fg);
+  background: var(--oz-fg);
+  color: var(--oz-bg);
+  transition: transform var(--oz-dur-fast, 120ms) var(--oz-ease-out, ease),
+              box-shadow var(--oz-dur-fast, 120ms) var(--oz-ease-out, ease);
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--qr-accent); }
+.btn:active { transform: translate(0, 0); box-shadow: none; }
+.btn--accent { background: var(--qr-accent); color: var(--oz-accent-fg); }
+.btn--ghost { background: transparent; color: var(--oz-fg); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.hint { color: var(--oz-muted); font-size: 0.8rem; }
+.err {
+  border: 2px solid var(--oz-fg);
+  background: color-mix(in srgb, #ff3b30 18%, var(--oz-bg));
+  color: var(--oz-fg);
+  padding: 0.6rem 0.75rem;
+  font-family: var(--oz-font-mono);
+  font-size: 0.8rem;
+}
+.mono { font-family: var(--oz-font-mono); }
+
+.oz-header { border-bottom-width: 2px; }
+.oz-footer { border-top-width: 2px; }
+
+/* ---- studio ---- */
+.app { margin-top: 1.5rem; }
+.tabs--mode { max-width: 22rem; margin-bottom: 1.25rem; }
+
+.studio {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 62rem) {
+  .studio { grid-template-columns: 1.1fr 0.9fr; align-items: start; }
+}
+
+.studio__form { padding: 1.1rem; }
+.studio__out {
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  position: sticky;
+  top: 1rem;
+}
+.studio__fields { margin-top: 1rem; }
+
+.ai { margin-bottom: 1rem; }
+.ai__label {
+  display: block;
+  font-family: var(--oz-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--oz-accent-fg);
+  background: var(--qr-accent);
+  padding: 0.3rem 0.5rem;
+  width: fit-content;
+  border: 2px solid var(--oz-fg);
+  border-bottom: 0;
+}
+.ai input {
+  font: inherit;
+  padding: 0.6rem 0.7rem;
+  background: var(--oz-bg);
+  color: var(--oz-fg);
+  border: 2px solid var(--oz-fg);
+}
+
+.custom { border: 2px solid var(--oz-fg); padding: 0.75rem; margin-top: 1rem; }
+.custom legend {
+  padding: 0 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-family: var(--oz-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--oz-muted);
+}
+.swatch input[type='color'] {
+  inline-size: 100%;
+  block-size: 2.4rem;
+  padding: 0;
+  border: 2px solid var(--oz-fg);
+  background: none;
+  cursor: pointer;
+}
+
+.qr-stage {
+  position: relative;
+  aspect-ratio: 1;
+  border: 2px solid var(--oz-fg);
+  background: var(--oz-paper-2);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.qr-canvas, .scan-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.scan-video { object-fit: cover; image-rendering: auto; }
+.qr-empty {
+  text-align: center;
+  letter-spacing: 0.2em;
+  color: var(--oz-muted);
+  font-size: 0.85rem;
+}
+.qr-busy {
+  position: absolute;
+  inset-block-end: 0.5rem;
+  inset-inline-end: 0.5rem;
+  background: var(--qr-accent);
+  color: var(--oz-accent-fg);
+  padding: 0.2rem 0.5rem;
+  font-size: 0.72rem;
+}
+.raw pre {
+  white-space: pre-wrap;
+  word-break: break-all;
+  font-size: 0.75rem;
+  border: 2px solid var(--oz-fg);
+  padding: 0.5rem;
+  margin: 0.4rem 0 0;
+  background: var(--oz-bg);
+}
+.raw summary {
+  cursor: pointer;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--oz-muted);
+}
+
+.dropzone {
+  margin-top: 0.85rem;
+  border: 2px dashed var(--oz-fg);
+  padding: 1.5rem 1rem;
+  text-align: center;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  color: var(--oz-muted);
+}
+.scan-result { padding: 0.75rem; width: 100%; }
+.scan-result__text { word-break: break-all; font-size: 0.85rem; margin: 0; }
+
+/* feature strip */
+.feats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  margin: 2rem 0 0.5rem;
+}
+.feat {
+  border: 2px solid var(--oz-fg);
+  padding: 0.8rem;
+  font-size: 0.82rem;
+}
+.feat b { font-family: var(--oz-font-mono); letter-spacing: 0.08em; }

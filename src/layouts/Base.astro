@@ -1,0 +1,38 @@
+---
+import '@chirag127/oz-tokens-base'
+import '@chirag127/oz-chrome/styles.css'
+import '@fontsource-variable/space-grotesk'
+import '@fontsource-variable/jetbrains-mono'
+import '../styles/theme.css'
+import OzToolShell from '@chirag127/oz-chrome/components/OzToolShell.astro'
+
+interface Props {
+  title?: string
+  description?: string
+}
+const {
+  title = 'oriz-qr — QR studio',
+  description = 'Generate & scan QR codes in your browser. Text, URL, Wi-Fi, contact, UPI, email, SMS. Custom colors + logo. 100% client-side — nothing uploaded.',
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <OzToolShell site="qr" title="QR studio">
+      <a slot="nav" class="mono" href="https://github.com/chirag127/oriz-qr" style="font-size:.8rem;letter-spacing:.08em">GITHUB</a>
+      <slot />
+    </OzToolShell>
+  </body>
+</html>

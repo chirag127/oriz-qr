@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://qr.oriz.in/sitemap-index.xml
