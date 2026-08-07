@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="oriz QR">
+  <rect width="512" height="512" fill="#ffffff"/>
+  <g fill="#0a0a0a">
+    <!-- finder top-left -->
+    <rect x="48" y="48" width="144" height="144"/><rect x="80" y="80" width="80" height="80" fill="#ffffff"/><rect x="96" y="96" width="48" height="48"/>
+    <!-- finder top-right -->
+    <rect x="320" y="48" width="144" height="144"/><rect x="352" y="80" width="80" height="80" fill="#ffffff"/><rect x="368" y="96" width="48" height="48"/>
+    <!-- finder bottom-left -->
+    <rect x="48" y="320" width="144" height="144"/><rect x="80" y="352" width="80" height="80" fill="#ffffff"/><rect x="96" y="368" width="48" height="48"/>
+    <!-- timing / data modules -->
+    <rect x="240" y="48" width="32" height="32"/><rect x="240" y="112" width="32" height="32"/><rect x="240" y="176" width="32" height="32"/>
+    <rect x="48" y="240" width="32" height="32"/><rect x="112" y="240" width="32" height="32"/><rect x="176" y="240" width="32" height="32"/>
+    <rect x="320" y="320" width="32" height="32"/><rect x="384" y="320" width="32" height="32"/><rect x="432" y="384" width="32" height="32"/><rect x="320" y="432" width="32" height="32"/>
+    <rect x="240" y="304" width="32" height="32"/><rect x="304" y="240" width="32" height="32"/>
+  </g>
+  <!-- lime signature module -->
+  <rect x="384" y="384" width="48" height="48" fill="#c6ff00"/>
+</svg>

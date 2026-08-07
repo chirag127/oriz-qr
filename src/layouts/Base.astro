@@ -5,6 +5,7 @@ import '@fontsource-variable/space-grotesk'
 import '@fontsource-variable/jetbrains-mono'
 import '../styles/theme.css'
 import OzToolShell from '@chirag127/oz-chrome/components/OzToolShell.astro'
+import { pwaInfo } from 'virtual:pwa-info'
 
 interface Props {
   title?: string
@@ -22,12 +23,16 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <meta name="theme-color" content="#c6ff00" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta name="generator" content={Astro.generator} />
+    {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+    <script is:inline src="/registerSW.js"></script>
   </head>
   <body>
     <OzToolShell site="qr" title="QR studio">
