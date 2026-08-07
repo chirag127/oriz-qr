@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About oriz-qr — QR studio (generate + scan)</title>
+<meta name="description" content="About oriz-qr: a free, 100% client-side QR code studio. Generate QR codes for links, Wi-Fi, vCard and UPI, customize + scan — nothing leaves your device." />
+<link rel="canonical" href="https://chirag127.github.io/oriz-qr/" />
+<style>
+  :root { --bg:#f7f7f5; --fg:#18181b; --muted:#5b5b66; --line:#e3e3de; --accent:#2563eb; --card:#fff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#121215; --fg:#ececf0; --muted:#a1a1ad; --line:#2a2a30; --accent:#7aa2ff; --card:#1a1a1f; }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin:0; background:var(--bg); color:var(--fg);
+    font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:720px; margin:0 auto; padding:3rem 1.25rem 4rem; }
+  .badge { display:inline-block; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:.25rem .7rem; }
+  h1 { font-size:2rem; margin:1rem 0 .35rem; line-height:1.2; }
+  .lede { color:var(--muted); font-size:1.05rem; margin:.25rem 0 1.5rem; }
+  .cta { display:flex; flex-wrap:wrap; gap:.6rem; margin:1.25rem 0 2rem; }
+  a.btn { text-decoration:none; border:1px solid var(--line); border-radius:10px;
+    padding:.6rem 1rem; color:var(--fg); background:var(--card); font-weight:600; }
+  a.btn--primary { background:var(--accent); border-color:var(--accent); color:#fff; }
+  a { color:var(--accent); }
+  h2 { font-size:1.15rem; margin:2rem 0 .6rem; }
+  ul { margin:.4rem 0 0; padding-left:1.2rem; }
+  li { margin:.3rem 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:1rem 1.2rem; }
+  code { background:var(--line); padding:.1rem .35rem; border-radius:5px; font-size:.9em; }
+  footer { margin-top:2.5rem; padding-top:1.25rem; border-top:1px solid var(--line);
+    color:var(--muted); font-size:.9rem; }
+  .note { color:var(--muted); font-size:.9rem; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <span class="badge">About this project</span>
+  <h1>oriz-qr</h1>
+  <p class="lede">A free, 100% client-side <strong>QR studio</strong>: generate (URL / Wi-Fi / vCard / UPI &amp; more), customize, and scan — all in your browser.</p>
+
+  <p class="note">This is the project info page. Looking for the tool itself? Open the live app below.</p>
+
+  <div class="cta">
+    <a class="btn btn--primary" href="https://qr.oriz.in">Open the live app →</a>
+    <a class="btn" href="https://github.com/chirag127/oriz-qr">Source on GitHub</a>
+    <a class="btn" href="https://qr.oriz.in/llms.txt">llms.txt</a>
+  </div>
+
+  <h2>What it is</h2>
+  <div class="card">
+    <p style="margin:.2rem 0">oriz-qr generates QR codes for seven payload types and scans QR codes back — entirely on your device. Build a code, restyle it, add a logo, export PNG or SVG; or switch to Scan to read a code with your camera or from an image.</p>
+  </div>
+
+  <h2>Key features</h2>
+  <ul>
+    <li><strong>7 payload types</strong> — URL, text, Wi-Fi, contact (vCard 3.0), UPI payment, email, SMS.</li>
+    <li><strong>Customize</strong> — any ink + paper color, center logo overlay, error-correction L/M/Q/H.</li>
+    <li><strong>Export</strong> — download PNG (raster) or SVG (vector).</li>
+    <li><strong>Scan</strong> — live camera decode or drop/pick a QR image; open-link + copy actions.</li>
+    <li><strong>AI describe (optional)</strong> — type plain language and it picks the type + fills fields.</li>
+  </ul>
+
+  <h2>Tech</h2>
+  <ul>
+    <li>Client-only <strong>Astro</strong> + React 19 islands + Tailwind v4 — static, no backend.</li>
+    <li><strong>g4f AI</strong> via <code>@chirag127/oz-ai</code> (keyless, multi-provider failover; optional).</li>
+    <li><strong>PWA-installable</strong>, offline-capable.</li>
+    <li><strong>100% in-browser</strong> — no upload, no signup, no tracking.</li>
+  </ul>
+
+  <h2>Links</h2>
+  <ul>
+    <li>Live app: <a href="https://qr.oriz.in">qr.oriz.in</a></li>
+    <li>Source: <a href="https://github.com/chirag127/oriz-qr">github.com/chirag127/oriz-qr</a></li>
+    <li>For LLMs/agents: <a href="https://qr.oriz.in/llms.txt">llms.txt</a> · <a href="https://qr.oriz.in/llms-full.txt">llms-full.txt</a></li>
+  </ul>
+
+  <footer>
+    MIT © 2026 Chirag Singhal · This page is about the project; the app lives at <a href="https://qr.oriz.in">qr.oriz.in</a>.
+  </footer>
+</main>
+</body>
+</html>

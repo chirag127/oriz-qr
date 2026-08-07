@@ -1,0 +1,34 @@
+# oriz-qr
+
+> Free, 100% client-side QR code studio at qr.oriz.in — generate QR codes for links, text, Wi-Fi, contacts (vCard), UPI payments, email and SMS; restyle colors + logo; and scan any QR with your camera or a dropped image. Everything runs in your browser: no upload, no signup, no tracking.
+
+## App
+
+- [QR studio (Generate + Scan)](https://qr.oriz.in/): single-page studio with a Generate tab and a Scan tab. Pick a payload type, fill fields, restyle, export PNG/SVG — or switch to Scan to decode.
+
+## Generate — payload types
+
+- [URL](https://qr.oriz.in/): encode any web link.
+- [Text](https://qr.oriz.in/): encode arbitrary plain text.
+- [Wi-Fi](https://qr.oriz.in/): SSID + password + security (WPA/WPA2, WEP, none) + hidden flag; phones join on scan.
+- [Contact (vCard 3.0)](https://qr.oriz.in/): name, org, title, phone, email, website, address.
+- [UPI payment](https://qr.oriz.in/): VPA (pa), payee name (pn), optional amount (am) + note (tn) — Indian UPI intent link.
+- [Email](https://qr.oriz.in/): recipient, subject, body → mailto QR.
+- [SMS](https://qr.oriz.in/): phone + message → sms QR.
+
+## Customize + export
+
+- [Restyle](https://qr.oriz.in/): choose ink + paper colors, drop a center logo, set error-correction L/M/Q/H (use Max for logos).
+- [Export](https://qr.oriz.in/): download as PNG (raster) or SVG (vector).
+- [AI describe](https://qr.oriz.in/): type plain language (e.g. "wifi for guests, password hunter2") and the tool picks the type + fills fields via the shared g4f AI client; works manually if AI is down.
+
+## Scan
+
+- [Scan with camera](https://qr.oriz.in/): live decode via getUserMedia + jsQR, on-device.
+- [Decode image](https://qr.oriz.in/): drop or pick a QR image; decoded locally, open-link + copy actions.
+
+## About
+
+- [Full text for LLMs](https://qr.oriz.in/llms-full.txt): complete site content as markdown.
+- [Project info page](https://chirag127.github.io/oriz-qr/): what oriz-qr is, features, tech.
+- [Source (GitHub)](https://github.com/chirag127/oriz-qr): MIT-licensed source.

@@ -1,0 +1,105 @@
+# oriz-qr — Free QR Code Generator & Scanner
+
+**Live app:** https://qr.oriz.in
+**Source:** https://github.com/chirag127/oriz-qr
+**License:** MIT
+
+oriz-qr is a free, 100% client-side QR code studio. Generate QR codes for links, plain text, Wi-Fi, contacts (vCard), UPI payments, email and SMS — restyle the ink and paper colors, drop a logo in the center, tune error-correction, then export PNG or SVG. Flip to Scan to read any QR with your camera or a dropped image.
+
+Everything runs in the browser. Every payload is built and every code is decoded on your device; nothing is uploaded to a server. No signup, no account, no tracking.
+
+---
+
+## Hero
+
+**Free QR Code Generator & Scanner**
+
+Make QR codes for links, Wi-Fi, contacts, UPI, email & SMS — then scan any code with your camera. No upload, no signup, nothing leaves your device.
+
+The studio has two modes, chosen by tabs at the top:
+
+- **Generate** — build a QR code from one of seven payload types, restyle it, and download it.
+- **Scan** — decode any QR code with your camera or from an image file.
+
+---
+
+## Generate mode
+
+### Payload types
+
+Choose a type with the tabs, then fill its fields. The QR re-renders live on every change.
+
+1. **URL** — encode any web link. Example: `oriz.in`.
+2. **Text** — encode any plain text string.
+3. **Wi-Fi** — fields: Network (SSID), Password, Security (WPA/WPA2, WEP, or None), Hidden network (yes/no). Scanning phones offer to join the network. Encoded as the standard `WIFI:` string.
+4. **Contact (vCard 3.0)** — fields: First name, Last name, Organization, Title, Phone, Email, Website, Address. Scanning saves a contact card.
+5. **UPI payment** — fields: UPI ID / VPA (e.g. `name@bank`), Payee name, Amount in ₹ (optional), Note (optional). Encoded as a `upi://pay` intent link for Indian payment apps.
+6. **Email** — fields: To, Subject, Body. Encoded as a `mailto:` link that opens a pre-filled email.
+7. **SMS** — fields: Phone, Message. Encoded as an `sms:` link that opens a pre-filled text message.
+
+### Style / customize
+
+- **Ink color** — the dark modules (any color).
+- **Paper color** — the light background (any color).
+- **Robustness (error-correction)** — Low (L), Medium (M), High (Q), or Max/logo-safe (H). Higher levels survive damage and center logos.
+- **Logo** — add an image file; a white pad is punched in the center and the logo drawn over ~22% of the code. Use Max robustness so the code still scans with a logo. Logo can be removed.
+
+### Export
+
+- **Download PNG** — raster export from the canvas.
+- **Download SVG** — crisp vector export.
+- **Payload preview** — expand "payload" to see the exact encoded string.
+
+### AI describe (optional)
+
+A text box labeled "Describe it (AI)" accepts natural language, e.g. `wifi for guests, password hunter2`. Press Make (or Enter). The tool calls the shared `@chirag127/oz-ai` g4f client with multi-provider failover, picks the matching payload type, and fills the fields. If AI is unavailable it shows "AI unavailable — fill the fields manually" and the tool keeps working normally.
+
+---
+
+## Scan mode
+
+Point your camera at a QR, or drop / pick an image. Decoding runs entirely on your device.
+
+- **Scan with camera** — requests the rear camera via `getUserMedia({ facingMode: 'environment' })` and decodes frames live with `jsQR`. Stop camera ends the stream.
+- **Decode image** — pick an image file, or drag-and-drop a QR image onto the dropzone; it's decoded locally.
+- **Result** — the decoded text appears. If it's a link (http/https/upi/mailto/sms/tel/wifi) an **Open link** button appears. A **Copy** button copies the raw result to the clipboard.
+- If no code is found: "no QR code found in image".
+
+---
+
+## Privacy
+
+- 100% client-side. No server, no backend for QR logic.
+- No upload — images and camera frames never leave the device.
+- No signup, no account, no tracking/analytics on the tool.
+- The only optional network call is the AI-describe feature, which uses a keyless multi-provider g4f client; skipping it keeps the tool fully offline-capable.
+
+---
+
+## Tech
+
+- **Astro** static site + **React 19** islands + **Tailwind v4**.
+- QR generation: [`qrcode`](https://www.npmjs.com/package/qrcode). QR decoding: [`jsQR`](https://www.npmjs.com/package/jsqr). Both are dynamically imported only when you generate or scan, so first paint is instant.
+- Shared atomic `@chirag127/oz-*` packages: `oz-ai` (g4f AI client), `oz-file` (download helpers), `oz-tokens-base` (token contract), `oz-chrome` (oriz.in chrome).
+- **PWA-installable** (offline-capable). Deployed on Cloudflare Pages.
+- Op-art visual design: hard black-and-white with one electric-lime accent, modular pixel-mosaic grid.
+
+---
+
+## FAQ
+
+**Is it free?** Yes, completely free, no account.
+
+**Does my data get uploaded?** No. QR building and scanning happen on your device. Nothing is sent to a server.
+
+**What QR types can I make?** URL, text, Wi-Fi, contact (vCard), UPI payment, email, SMS.
+
+**Can I add a logo?** Yes — add an image and set robustness to Max so it still scans.
+
+**What formats can I export?** PNG (raster) and SVG (vector).
+
+**Can I scan codes too?** Yes — with your camera live, or by dropping/picking an image.
+
+**Do I need to install anything?** No, it runs in the browser. It's also installable as a PWA if you want an app-like launcher.
+
+**Where's the source?** https://github.com/chirag127/oriz-qr (MIT).

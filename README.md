@@ -1,14 +1,16 @@
 # oriz-qr — QR studio
 
-**Live: https://qr.oriz.in**
+- **Live app:** https://qr.oriz.in
+- **About / info:** https://chirag127.github.io/oriz-qr/
+- **For LLMs:** https://qr.oriz.in/llms.txt
 
 Generate and scan QR codes entirely in your browser. Make codes for links, plain
 text, Wi-Fi, contacts (vCard), UPI payments, email and SMS — restyle the ink and
 paper colors, drop a logo in the center, tune error-correction, then export PNG
 or SVG. Flip to **Scan** to read any QR with your camera or a dropped image.
 
-**100% client-side. No upload, no signup, no tracking.** Every payload is built
-and every code is decoded on your device; nothing touches a server.
+**100% client-side, no upload, no signup, free.** Every payload is built and every
+code is decoded on your device; nothing touches a server.
 
 ## Features
 
@@ -17,14 +19,15 @@ and every code is decoded on your device; nothing touches a server.
 - **Export** — download as PNG (canvas) or crisp SVG (vector).
 - **Scan** — live camera decode (`getUserMedia` + `jsQR`) or decode a dropped/picked image.
 - **AI describe** (optional) — type "wifi for guests, password hunter2" and it fills the right fields. Uses the shared `@chirag127/oz-ai` g4f client with multi-provider failover; if AI is down the tool still works.
-- **Op-art design** — hard black-and-white, one electric-lime accent, modular pixel-mosaic grid.
+- **PWA-installable**, offline-capable.
 
 ## Stack
 
 Astro (static) + React 19 islands + Tailwind v4. Heavy libs (`qrcode`, `jsQR`)
 are dynamically imported only when you trigger generate/scan, so first paint is
 instant. Shared `@chirag127/oz-*` atomic packages provide the AI client, file
-helpers, token contract and oriz.in chrome.
+helpers, token contract and oriz.in chrome. Deployed on Cloudflare Pages; the
+info page is served from GitHub Pages.
 
 ## Develop
 
