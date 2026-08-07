@@ -13,10 +13,10 @@ const cells = Array.from({ length: 54 }, (_, i) => {
 <Base>
   <section class="hero">
     <span class="hero__kicker">client-side qr studio</span>
-    <h1 class="hero__title">Make &amp; <em>Scan</em> QR</h1>
+    <h1 class="hero__title">Free QR Code <em>Generator</em> &amp; Scanner</h1>
     <p class="hero__sub">
-      Generate codes for links, Wi-Fi, contacts, UPI, email &amp; SMS — restyle the ink,
-      drop in a logo, then scan any code with your camera. Everything runs in your browser.
+      Make QR codes for links, Wi-Fi, contacts, UPI, email &amp; SMS — then scan any code with your camera.
+      No upload, no signup, nothing leaves your device.
     </p>
     <div class="mosaic" aria-hidden="true">
       {cells.map((c) => (
@@ -31,9 +31,8 @@ const cells = Array.from({ length: 54 }, (_, i) => {
   <Studio client:load />
 
   <div class="feats">
-    <div class="feat"><b>7 types</b><br />URL · text · Wi-Fi · contact · UPI · email · SMS</div>
     <div class="feat"><b>Restyle</b><br />any ink + paper color, logo overlay, error-correction</div>
-    <div class="feat"><b>Scan</b><br />live camera or drop an image — decoded on-device</div>
-    <div class="feat"><b>Private</b><br />no upload, no signup, no tracking</div>
+    <div class="feat"><b>Scan on-device</b><br />live camera or drop an image — decoded locally</div>
+    <div class="feat"><b>Private &amp; free</b><br />no upload, no signup, no tracking</div>
   </div>
 </Base>

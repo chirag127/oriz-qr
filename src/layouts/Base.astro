@@ -12,9 +12,21 @@ interface Props {
   description?: string
 }
 const {
-  title = 'oriz-qr — QR studio',
-  description = 'Generate & scan QR codes in your browser. Text, URL, Wi-Fi, contact, UPI, email, SMS. Custom colors + logo. 100% client-side — nothing uploaded.',
+  title = 'QR Code Generator & Scanner — free, no signup | oriz QR',
+  description = 'Free online QR code generator & scanner — make QR codes for URLs, Wi-Fi, contacts, UPI, email & SMS with custom colors and a logo, then scan any code with your camera. 100% in your browser, no upload, no signup.',
 } = Astro.props
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://qr.oriz.in').href
+const ogImage = new URL('/screenshots/desktop.png', Astro.site ?? 'https://qr.oriz.in').href
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'oriz QR',
+  description,
+  applicationCategory: 'UtilitiesApplication',
+  operatingSystem: 'Web',
+  url: 'https://qr.oriz.in',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+}
 ---
 
 <!doctype html>
@@ -27,10 +39,19 @@ const {
     <meta name="theme-color" content="#c6ff00" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="oriz QR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <meta name="generator" content={Astro.generator} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
     <script is:inline src="/registerSW.js"></script>
   </head>
