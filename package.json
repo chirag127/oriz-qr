@@ -12,7 +12,7 @@
     "deploy": "astro build && wrangler pages deploy dist --project-name oriz-qr --branch main --commit-dirty=true"
   },
   "dependencies": {
-    "@astrojs/react": "^4.4.0",
+    "@astrojs/react": "^6.0.4",
     "@astrojs/sitemap": "^3.6.0",
     "@chirag127/oz-ai": "file:../design-system/packages/oz-ai",
     "@chirag127/oz-chrome": "file:../design-system/packages/oz-chrome",
@@ -21,7 +21,7 @@
     "@fontsource-variable/jetbrains-mono": "^5.2.5",
     "@fontsource-variable/space-grotesk": "^5.2.5",
     "@tailwindcss/vite": "^4.1.13",
-    "astro": "^6.4.8",
+    "astro": "^7.2.9",
     "jsqr": "^1.4.0",
     "qrcode": "^1.5.4",
     "react": "^19.2.0",
@@ -31,11 +31,11 @@
   "devDependencies": {
     "@types/qrcode": "^1.5.5",
     "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
+    "@types/react-dom": "^19.2.5",
     "@vite-pwa/astro": "^1.2.0",
-    "typescript": "^5.9.2",
-    "vitest": "^3.2.4",
-    "wrangler": "^4.42.0"
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.127.1"
   },
   "allowScripts": {
     "esbuild@0.27.7": true,
