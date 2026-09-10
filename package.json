@@ -21,7 +21,7 @@
     "@fontsource-variable/jetbrains-mono": "^5.2.5",
     "@fontsource-variable/space-grotesk": "^5.2.5",
     "@tailwindcss/vite": "^4.1.13",
-    "astro": "^6.4.8",
+    "astro": "^7.2.8",
     "jsqr": "^1.4.0",
     "qrcode": "^1.5.4",
     "react": "^19.2.0",
